@@ -76,6 +76,7 @@ export const site = {
   socials: [
     { label: "GitHub", href: "https://github.com/dot-hpg" },
     { label: "LinkedIn", href: "https://www.linkedin.com/in/dot-hpg" },
+    { label: "Instagram", href: "https://www.instagram.com/dot_agentic/" },
   ],
 };
 
