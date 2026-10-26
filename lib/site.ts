@@ -48,6 +48,10 @@ export const site = {
           label: "Read the LinkedIn post",
           href: "https://www.linkedin.com/posts/dot-hpg_artificialintelligence-machinelearning-nlp-share-7520422456981921793-UofA",
         },
+        {
+          label: "Read the article on Medium",
+          href: "https://medium.com/@connect.hpg/teaching-machines-to-read-tweets-named-entity-recognition-with-bilstm-crf-and-bert-5b8e1e1ec07d",
+        },
       ],
     },
     {
