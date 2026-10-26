@@ -85,18 +85,42 @@ export default function Home() {
         </motion.h2>
         <p className="mt-3 text-slate-400">A few things I&apos;ve built recently.</p>
 
-        <div className="mt-10 grid gap-6 md:grid-cols-2">
+        <div className="mt-10 grid gap-6 md:grid-cols-3">
           {site.projects.map((p, i) => (
-            <motion.a
+            <motion.div
               key={p.title}
-              href={p.href}
               {...fadeUp}
               transition={{ delay: i * 0.15, duration: 0.5 }}
               whileHover={{ y: -6 }}
-              className="group rounded-2xl border border-slate-800 bg-slate-900/60 p-7 transition-colors hover:border-indigo-500/60"
+              className={`group flex flex-col rounded-2xl border p-7 transition-colors ${
+                p.featured
+                  ? "border-indigo-500/40 bg-gradient-to-br from-indigo-950/50 to-slate-900/60 hover:border-indigo-400/70 md:col-span-3 md:p-10"
+                  : "border-slate-800 bg-slate-900/60 hover:border-indigo-500/60"
+              }`}
             >
-              <h3 className="text-xl font-semibold">{p.title}</h3>
-              <p className="mt-2 text-slate-400">{p.desc}</p>
+              {p.featured && (
+                <span className="mb-4 w-fit rounded-full bg-indigo-500/15 px-3 py-1 text-xs font-medium text-indigo-300">
+                  Featured project
+                </span>
+              )}
+              <h3 className={p.featured ? "text-2xl font-semibold md:text-3xl" : "text-xl font-semibold"}>
+                {p.title}
+              </h3>
+              <p className={`mt-2 text-slate-400 ${p.featured ? "max-w-3xl md:text-lg" : ""}`}>{p.desc}</p>
+
+              {p.highlights && (
+                <div className="mt-6 grid gap-4 sm:grid-cols-3">
+                  {p.highlights.map((h) => (
+                    <div key={h.label} className="rounded-xl border border-slate-800 bg-slate-950/50 p-4">
+                      <div className="bg-gradient-to-r from-indigo-400 to-pink-400 bg-clip-text text-3xl font-bold text-transparent">
+                        {h.value}
+                      </div>
+                      <div className="mt-1 text-sm text-slate-400">{h.label}</div>
+                    </div>
+                  ))}
+                </div>
+              )}
+
               <div className="mt-5 flex flex-wrap gap-2">
                 {p.tags.map((t) => (
                   <span key={t} className="rounded-full bg-slate-800 px-3 py-1 text-xs text-slate-300">
@@ -104,7 +128,23 @@ export default function Home() {
                   </span>
                 ))}
               </div>
-            </motion.a>
+
+              {p.links && (
+                <div className="mt-6 flex flex-wrap gap-3 pt-1">
+                  {p.links.map((l) => (
+                    <a
+                      key={l.href}
+                      href={l.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="rounded-lg border border-slate-700 px-4 py-2 text-sm text-slate-200 transition-colors hover:border-slate-500 hover:bg-slate-800 hover:text-white"
+                    >
+                      {l.label} →
+                    </a>
+                  ))}
+                </div>
+              )}
+            </motion.div>
           ))}
         </div>
       </section>

@@ -1,5 +1,15 @@
 // All the text on the site lives here. Edit this file to update your portfolio.
 
+export type Project = {
+  title: string;
+  desc: string;
+  tags: string[];
+  // Featured projects span the full width and show their highlights.
+  featured?: boolean;
+  highlights?: { value: string; label: string }[];
+  links?: { label: string; href: string }[];
+};
+
 export const site = {
   name: "Guntuku Hariprasad",
   shortName: "Hariprasad",
@@ -24,34 +34,43 @@ export const site = {
   projects: [
     {
       title: "Twitter Named Entity Recognition",
-      desc: "Finds people, places, companies and products in noisy tweets. Compares a BiLSTM-CRF built in TensorFlow with a fine-tuned BERT model.",
-      tags: ["NLP", "TensorFlow", "BERT"],
-      href: "https://github.com/dot-hpg/twitter-ner",
+      desc: "An end-to-end NLP system that reads tweets and identifies the people, places, companies and products being discussed, without relying on hashtags. I compared a BiLSTM-CRF built in TensorFlow with a fine-tuned BERT model across 17 controlled experiments on the WNUT-16 dataset, then served the best model through a production-ready API.",
+      tags: ["NLP", "BERT", "TensorFlow", "BiLSTM-CRF", "FastAPI", "Docker", "Kubernetes"],
+      featured: true,
+      highlights: [
+        { value: "0.437", label: "Test F1 (fine-tuned BERT)" },
+        { value: "3.2×", label: "Better than the LSTM baseline" },
+        { value: "17", label: "Controlled experiments" },
+      ],
+      links: [
+        { label: "View on GitHub", href: "https://github.com/dot-hpg/twitter-ner" },
+        {
+          label: "Read the LinkedIn post",
+          href: "https://www.linkedin.com/posts/dot-hpg_artificialintelligence-machinelearning-nlp-share-7520422456981921793-UofA",
+        },
+      ],
     },
     {
       title: "AI Chat Assistant",
       desc: "A conversational assistant that answers questions and drafts content in seconds.",
       tags: ["Next.js", "AI"],
-      href: "#",
     },
     {
       title: "Smart Document Summarizer",
       desc: "Upload a document and get a clear, short summary with the key points.",
       tags: ["React", "LLM"],
-      href: "#",
     },
     {
       title: "Portfolio Website",
       desc: "This site — animated with Framer Motion and deployed on Vercel.",
       tags: ["Next.js", "Tailwind"],
-      href: "#",
     },
-  ],
+  ] as Project[],
   // Replace with the email address you want visitors to use.
   email: "your.email@example.com",
   socials: [
     { label: "GitHub", href: "https://github.com/dot-hpg" },
-    { label: "LinkedIn", href: "https://www.linkedin.com/" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/dot-hpg" },
   ],
 };
 
