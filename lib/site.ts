@@ -52,6 +52,7 @@ export const site = {
           label: "Read the article on Medium",
           href: "https://medium.com/@connect.hpg/teaching-machines-to-read-tweets-named-entity-recognition-with-bilstm-crf-and-bert-5b8e1e1ec07d",
         },
+        { label: "See it on Instagram", href: "https://www.instagram.com/p/De9KozimMyt/" },
       ],
     },
     {
