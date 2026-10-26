@@ -23,6 +23,13 @@ export const site = {
   ],
   projects: [
     {
+      title: "Twitter Named Entity Recognition",
+      desc: "Finds people, places, companies and products in noisy tweets. Compares a BiLSTM-CRF built in TensorFlow with a fine-tuned BERT model.",
+      tags: ["NLP", "TensorFlow", "BERT"],
+      // TODO: replace with the GitHub repo URL once the twitter-ner repo is published.
+      href: "#",
+    },
+    {
       title: "AI Chat Assistant",
       desc: "A conversational assistant that answers questions and drafts content in seconds.",
       tags: ["Next.js", "AI"],

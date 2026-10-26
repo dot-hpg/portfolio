@@ -85,7 +85,7 @@ export default function Home() {
         </motion.h2>
         <p className="mt-3 text-slate-400">A few things I&apos;ve built recently.</p>
 
-        <div className="mt-10 grid gap-6 md:grid-cols-3">
+        <div className="mt-10 grid gap-6 md:grid-cols-2">
           {site.projects.map((p, i) => (
             <motion.a
               key={p.title}
