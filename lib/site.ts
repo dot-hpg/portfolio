@@ -56,6 +56,21 @@ export const site = {
       ],
     },
     {
+      title: "Retail Sales Forecasting",
+      desc: "Forecasts daily sales for 365 retail stores, 61 days ahead, so the business can plan inventory, staffing and promotions. After testing 8 hypotheses and comparing 10 models with leakage-free features and rolling-origin validation, a global LightGBM model came out on top. It is served through a Flask REST API and a mobile-friendly Streamlit app.",
+      tags: ["Time series", "LightGBM", "XGBoost", "Python", "Flask", "Streamlit", "SHAP"],
+      featured: true,
+      highlights: [
+        { value: "~90%", label: "Accurate for store-month planning" },
+        { value: "16.8%", label: "Daily WAPE on a 61-day hold-out" },
+        { value: "+33%", label: "Sales lift from discounts, measured" },
+      ],
+      links: [
+        { label: "View on GitHub", href: "https://github.com/dot-hpg/sales-forecasting" },
+        { label: "Read the blog post", href: "https://github.com/dot-hpg/sales-forecasting/blob/main/docs/blog.md" },
+      ],
+    },
+    {
       title: "AI Chat Assistant",
       desc: "A conversational assistant that answers questions and drafts content in seconds.",
       tags: ["Next.js", "AI"],
