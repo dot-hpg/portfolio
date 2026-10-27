@@ -13,8 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Guntuku Hariprasad | AI App Developer",
-  description: "Portfolio of Guntuku Hariprasad, an AI app developer building modern web apps.",
+  title: "Guntuku Hariprasad | AI Engineer",
+  description:
+    "Portfolio of Guntuku Hariprasad, an AI Engineer building NLP, embedding and forecasting systems that ship to production.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
