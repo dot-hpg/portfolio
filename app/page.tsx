@@ -99,8 +99,12 @@ export default function Home() {
               }`}
             >
               {p.featured && (
-                <span className="mb-4 w-fit rounded-full bg-indigo-500/15 px-3 py-1 text-xs font-medium text-indigo-300">
-                  Featured project
+                <span
+                  className={`mb-4 w-fit rounded-full px-3 py-1 text-xs font-medium ${
+                    p.badge ? "bg-pink-500/15 text-pink-300" : "bg-indigo-500/15 text-indigo-300"
+                  }`}
+                >
+                  {p.badge ?? "Featured project"}
                 </span>
               )}
               <h3 className={p.featured ? "text-2xl font-semibold md:text-3xl" : "text-xl font-semibold"}>
@@ -129,9 +133,17 @@ export default function Home() {
                 ))}
               </div>
 
-              {p.links && (
+              {(p.links || p.caseStudy) && (
                 <div className="mt-6 flex flex-wrap gap-3 pt-1">
-                  {p.links.map((l) => (
+                  {p.caseStudy && (
+                    <Link
+                      href={p.caseStudy}
+                      className="rounded-lg bg-white px-4 py-2 text-sm font-medium text-slate-950 transition-colors hover:bg-slate-200"
+                    >
+                      Read the full case study →
+                    </Link>
+                  )}
+                  {p.links?.map((l) => (
                     <a
                       key={l.href}
                       href={l.href}

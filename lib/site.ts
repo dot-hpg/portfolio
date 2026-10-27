@@ -6,6 +6,10 @@ export type Project = {
   tags: string[];
   // Featured projects span the full width and show their highlights.
   featured?: boolean;
+  // Replaces the "Featured project" label on the card.
+  badge?: string;
+  // Internal page with the full write-up, e.g. "/projects/fitcheck".
+  caseStudy?: string;
   highlights?: { value: string; label: string }[];
   links?: { label: string; href: string }[];
 };
@@ -32,6 +36,23 @@ export const site = {
     "Vercel",
   ],
   projects: [
+    {
+      title: "FitCheck — AI Resume & Job Match",
+      desc: "Built for my AI Engineer applications: a private resume checker that scores how well a resume matches a job post and explains every point of the score. A sentence-embedding model (all-MiniLM-L6-v2) runs entirely in the browser to match each job requirement with the resume line that means the same thing, even in different words. It also finds missing skills and rewrites weak bullet points. Nothing is uploaded, and there is no backend or sign-up.",
+      tags: ["On-device AI", "Transformers.js", "ONNX Runtime Web", "Embeddings", "NLP", "React 19", "TypeScript", "Playwright"],
+      featured: true,
+      badge: "Built for AI Engineer roles",
+      caseStudy: "/projects/fitcheck",
+      highlights: [
+        { value: "100%", label: "On-device: no server, nothing uploaded" },
+        { value: "350+", label: "Skill aliases across ~100 skills" },
+        { value: "~97%", label: "Test coverage of the matching engine" },
+      ],
+      links: [
+        { label: "Try the live app", href: "https://dot-hpg.github.io/fitcheck/" },
+        { label: "View on GitHub", href: "https://github.com/dot-hpg/fitcheck" },
+      ],
+    },
     {
       title: "Twitter Named Entity Recognition",
       desc: "An end-to-end NLP system that reads tweets and identifies the people, places, companies and products being discussed, without relying on hashtags. I compared a BiLSTM-CRF built in TensorFlow with a fine-tuned BERT model across 17 controlled experiments on the WNUT-16 dataset, then served the best model through a production-ready API.",
