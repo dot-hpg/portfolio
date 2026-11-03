@@ -74,7 +74,7 @@ export const caseStudies: CaseStudy[] = [
       { src: "/scaler/netflix/08_tv_vs_movie_trend.png", alt: "Chart of TV's share of additions rising since 2018", width: 1632, height: 525, caption: "TV's share of new additions has risen since 2018." },
       { src: "/scaler/netflix/10_country_type_mix.png", alt: "Chart of the movie and TV mix in each country", width: 1484, height: 555, caption: "The movie and TV mix differs sharply by country." },
       { src: "/scaler/netflix/11_country_genre_heatmap.png", alt: "Heatmap of genre mix by country", width: 1654, height: 675, caption: "Genre mix by country." },
-      { src: "/scaler/netflix/19_best_launch_month.png", alt: "Chart of title additions by month", width: 1934, height: 554, caption: "The best months to launch." },
+      { src: "/scaler/netflix/19_best_launch_month.png", alt: "Line chart of the share of movies and TV shows added each month, and a heatmap of titles added by year and month", width: 1934, height: 554, caption: "Share of each type added per month, and titles added by year and month. July and December stand out for TV." },
     ],
     method: [
       { title: "Cleaning", desc: "Fixed 3 rows where duration was typed into rating, trimmed text, parsed date_added and split duration into a number and a unit." },
@@ -374,7 +374,7 @@ export const caseStudies: CaseStudy[] = [
     charts: [
       { src: "/scaler/delhivery/07_actual_time_vs_osrm_time.png", alt: "Comparison of actual trip time and OSRM planned time", width: 2234, height: 501, caption: "Actual time against the routing engine's planned time." },
       { src: "/scaler/delhivery/13_busiest_corridors.png", alt: "Chart of the busiest delivery corridors", width: 2231, height: 712, caption: "The busiest corridors." },
-      { src: "/scaler/delhivery/14_route_distance_delay.png", alt: "Charts of delay by route type and distance", width: 2234, height: 554, caption: "Delay by route type and distance." },
+      { src: "/scaler/delhivery/14_route_distance_delay.png", alt: "Charts of delay by distance and route type, actual vs planned speed, and delay by number of segments", width: 2234, height: 554, caption: "Delay by distance and route type, actual vs planned speed, and delay by number of segments." },
     ],
     method: [
       { title: "Two-stage merge", desc: "Rows become 26,368 segments, then 14,817 trips, with the right aggregation (first, last or sum) chosen for every column." },
