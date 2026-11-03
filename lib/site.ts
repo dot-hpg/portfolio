@@ -96,6 +96,24 @@ export const site = {
       ],
     },
     {
+      title: "FlipItNews — News Article Classification",
+      desc: "Sorts news articles into Business, Politics, Sports, Technology and Entertainment for a fintech content platform. A tested text pipeline (tokenisation, stopwords, POS-aware lemmatisation) feeds Bag of Words or TF-IDF features into six scikit-learn models, ranked with cross-validation and checked for duplicate leakage. The deployed model's confidence score sends unsure articles to an editor. It is served through a FastAPI REST API and a Streamlit app, packaged with Docker.",
+      tags: ["NLP", "scikit-learn", "NLTK", "TF-IDF", "FastAPI", "Streamlit", "Docker"],
+      featured: true,
+      highlights: [
+        { value: "98.0%", label: "Test accuracy (Logistic Regression)" },
+        { value: "99.8%", label: "Accuracy with editor review rule" },
+        { value: "12", label: "Model + vectorizer pairs compared" },
+      ],
+      links: [
+        { label: "View on GitHub", href: "https://github.com/dot-hpg/flipitnews-news-classification" },
+        {
+          label: "Read the blog post",
+          href: "https://github.com/dot-hpg/flipitnews-news-classification/blob/main/docs/blog.md",
+        },
+      ],
+    },
+    {
       title: "AI Chat Assistant",
       desc: "A conversational assistant that answers questions and drafts content in seconds.",
       tags: ["Next.js", "AI"],
