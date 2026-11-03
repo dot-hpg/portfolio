@@ -239,6 +239,48 @@ export const site = {
         },
       ],
     },
+    {
+      title: "Jamboree — Graduate Admission Prediction",
+      desc: "What decides an applicant's chance of getting into a top college abroad? A linear regression on 500 applicant profiles for Jamboree Education. I checked the data, standardised the features, read coefficients and p-values with an OLS model, and tested the assumptions of linear regression, including multicollinearity with VIF. CGPA, GRE and TOEFL matter most, while SOP and University Rating add little once the others are known.",
+      tags: ["Linear regression", "Python", "scikit-learn", "statsmodels", "VIF", "Seaborn"],
+      caseStudy: "/scaler/jamboree",
+      highlights: [
+        { value: "0.82", label: "R² on the test set" },
+        { value: "0.043", label: "Test MAE (about 4 percentage points)" },
+        { value: "0.88", label: "Correlation of CGPA with admission" },
+      ],
+      links: [{ label: "Read the report (PDF)", href: "/scaler/reports/jamboree-report.pdf" }],
+    },
+    {
+      title: "LoanTap — Credit Line Assessment",
+      desc: "Should LoanTap extend a credit line to a given person? A logistic regression on 396,030 loan records for personal loan underwriting. I explored the data, removed outliers, engineered and one-hot encoded features, then evaluated the model on precision and recall as well as accuracy. Interest rate, debt-to-income ratio and income are the strongest signals. Accuracy is 81%, but recall on defaulters is only 7%, and the page explains why and what to do next.",
+      tags: ["Logistic regression", "Python", "scikit-learn", "SMOTE", "ROC AUC", "Credit risk"],
+      caseStudy: "/scaler/loantap",
+      highlights: [
+        { value: "396,030", label: "Loan records analysed" },
+        { value: "0.70", label: "ROC AUC on the test set" },
+        { value: "19%", label: "Loans charged off" },
+      ],
+      links: [{ label: "Read the report (PDF)", href: "/scaler/reports/loantap-report.pdf" }],
+    },
+    {
+      title: "OLA — Driver Attrition with Ensemble Learning",
+      desc: "The case: driver churn is high at Ola, and finding new drivers costs more than keeping existing ones. Using monthly data on a segment of drivers from 2019 and 2020, the goal is to predict whether a driver will leave. It covers KNN imputation, feature engineering, class imbalance treatment, and bagging and boosting models, evaluated with a classification report and ROC AUC.",
+      tags: ["Ensemble learning", "Bagging", "Boosting", "KNN imputation", "Class imbalance"],
+      badge: "Results and code to be added",
+    },
+    {
+      title: "Scaler — Learner Clustering",
+      desc: "The case: profile the best companies and job positions from a segment of Scaler's learner database, by clustering learners on job profile, company, pay and experience. It covers cleaning company names with regex, imputation, manual clustering with designation, class and tier flags, then K-means and hierarchical clustering with the elbow method.",
+      tags: ["Clustering", "K-means", "Hierarchical clustering", "Regex", "Unsupervised learning"],
+      badge: "Results and code to be added",
+    },
+    {
+      title: "AdEase — Wikipedia Page View Forecasting",
+      desc: "The case: forecast daily views for 145k Wikipedia pages over 550 days, so that an ad company can optimise ad placement for clients in different regions. It covers splitting page names into title, language and access type, stationarity testing with Dickey-Fuller, decomposition and differencing, then forecasting with ARIMA, SARIMAX and Prophet.",
+      tags: ["Time series", "ARIMA", "SARIMAX", "Prophet", "Forecasting"],
+      badge: "Results and code to be added",
+    },
   ] as Project[],
   // Replace with the email address you want visitors to use.
   email: "your.email@example.com",

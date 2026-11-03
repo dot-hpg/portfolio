@@ -8,16 +8,20 @@ export type CaseStudy = {
   titleAccent: string;
   intro: string;
   metaDescription: string;
-  repo: string;
+  repo?: string;
   // Paths inside the repo, turned into GitHub links on the page.
-  report: string;
-  notebook: string;
+  report?: string;
+  notebook?: string;
+  // PDF hosted on this site, for projects that aren't on GitHub yet.
+  reportFile?: string;
   stats: { value: string; label: string }[];
   brief: [string, string];
   findings: { value: string; title: string; desc: string }[];
   table: { kicker: string; title: string; intro: string; headers: string[]; rows: string[][] };
-  charts: { src: string; alt: string; width: number; height: number; caption: string }[];
+  // narrow keeps small source images from being stretched and blurred.
+  charts: { src: string; alt: string; width: number; height: number; caption: string; narrow?: boolean }[];
   method: { title: string; desc: string }[];
+  recommendationsTitle?: string;
   recommendations: { title: string; desc: string }[];
   note?: { title: string; desc: string };
   stack: { group: string; items: string[] }[];
@@ -395,6 +399,150 @@ export const caseStudies: CaseStudy[] = [
       { group: "Data", items: ["Python", "pandas", "Jupyter"] },
       { group: "Statistics and ML", items: ["SciPy", "scikit-learn", "Wilcoxon signed-rank", "Mann-Whitney U"] },
       { group: "Techniques", items: ["Feature engineering", "IQR capping", "One-hot encoding", "Frequency encoding", "Scaling"] },
+    ],
+  },
+  {
+    slug: "jamboree",
+    number: 7,
+    caseName: "Jamboree Education business case",
+    titleLead: "Jamboree:",
+    titleAccent: "predicting graduate admission",
+    intro:
+      "What decides an applicant's chance of getting into a top college abroad? A linear regression on 500 applicant profiles that measures which factors matter and predicts the chance of admission.",
+    metaDescription:
+      "Linear regression on 500 Jamboree Education applicants to predict the chance of graduate admission, with a full check of the model's assumptions.",
+    reportFile: "/scaler/reports/jamboree-report.pdf",
+    stats: [
+      { value: "500", label: "Applicants analysed" },
+      { value: "0.82", label: "R² on the test set" },
+      { value: "0.043", label: "Test MAE (about 4 percentage points)" },
+      { value: "7", label: "Features in the model" },
+    ],
+    brief: [
+      "Jamboree helps students prepare for exams like the GMAT, GRE and SAT and gain admission to top colleges abroad. It recently added a website feature that lets students estimate their chance of admission to Ivy League colleges, from the perspective of Indian applicants.",
+      "The case asks which factors are important in graduate admissions, how they relate to each other, and how well an applicant's chance of admission can be predicted from them.",
+    ],
+    findings: [
+      { value: "0.88", title: "CGPA matters most", desc: "CGPA has the strongest correlation with chance of admission and the largest model coefficient (0.068)." },
+      { value: "0.77 vs 0.82", title: "CGPA can't be dropped", desc: "Removing CGPA cuts the training R² from 0.82 to 0.77, so it adds real predictive power." },
+      { value: "0.81", title: "Test scores follow closely", desc: "GRE correlates 0.81 and TOEFL 0.79 with chance of admission, and both are significant in the model." },
+      { value: "p > 0.5", title: "Two weak signals", desc: "Once the other factors are included, University Rating (p = 0.541) and SOP (p = 0.721) add little." },
+      { value: "4.65", title: "No multicollinearity problem", desc: "Every feature has a VIF below 5, with CGPA the highest, so no feature needed dropping." },
+      { value: "0.82 / 0.82", title: "No sign of overfitting", desc: "R² is 0.821 on training data and 0.819 on test data, and errors are almost the same on both." },
+    ],
+    table: {
+      kicker: "Model results",
+      title: "What drives the chance of admission",
+      intro: "Coefficients from the OLS model on standardised features, so they can be compared directly. Adjusted R² is 0.818 on training data and 0.805 on test data.",
+      headers: ["Feature", "Coefficient", "p-value", "Significant?"],
+      rows: [
+        ["CGPA", "0.0676", "0.000", "Yes"],
+        ["GRE Score", "0.0267", "0.000", "Yes"],
+        ["TOEFL Score", "0.0182", "0.002", "Yes"],
+        ["LOR", "0.0159", "0.000", "Yes"],
+        ["Research", "0.0119", "0.001", "Yes"],
+        ["University Rating", "0.0029", "0.541", "No"],
+        ["SOP", "0.0018", "0.721", "No"],
+      ],
+    },
+    charts: [
+      { src: "/scaler/jamboree/correlation.png", alt: "Heatmap of correlations between applicant features and chance of admission", width: 631, height: 606, caption: "Correlation between the features: CGPA, GRE and TOEFL track chance of admission most closely.", narrow: true },
+      { src: "/scaler/jamboree/features.png", alt: "Scatter plots of each feature against chance of admission", width: 1186, height: 1163, caption: "Each feature against chance of admission." },
+      { src: "/scaler/jamboree/residuals.png", alt: "Scatter plot of model errors against predicted values", width: 400, height: 262, caption: "Model errors against predicted values, used to check homoscedasticity.", narrow: true },
+    ],
+    method: [
+      { title: "Exploration", desc: "Checked 500 rows and 9 columns, found no nulls or duplicates, dropped the serial number, and studied each feature against the target." },
+      { title: "Preparation", desc: "An 80/20 train-test split, with features standardised using a scaler fitted on the training data only." },
+      { title: "Modelling", desc: "An OLS model in statsmodels to read coefficients and p-values, alongside a scikit-learn LinearRegression for scoring." },
+      { title: "Multicollinearity", desc: "Checked VIF for every feature, then tested the model without CGPA to confirm it is worth keeping." },
+      { title: "Assumption checks", desc: "Residuals centred on zero and near normal, a linear relationship with the target, and no cone shape in errors against predictions." },
+      { title: "Evaluation", desc: "MAE, RMSE, R² and adjusted R² on both training and test data. Test RMSE is 0.061." },
+    ],
+    recommendationsTitle: "What this means for Jamboree",
+    recommendations: [
+      { title: "Build the admission predictor on these features", desc: "With a test R² of 0.82 and an average error of about 4 percentage points, the model is a useful estimate for students." },
+      { title: "Tell students to protect their CGPA", desc: "It is the strongest factor, and the model gets noticeably worse without it." },
+      { title: "Keep focusing on GRE and TOEFL preparation", desc: "Both have a significant effect on the chance of admission, and this is Jamboree's core strength." },
+      { title: "Encourage research and strong recommendations", desc: "Research experience and LOR strength both have a significant effect, though a smaller one." },
+      { title: "Treat SOP and University Rating as secondary", desc: "Neither one adds much once the other factors are known, so they shouldn't drive the prediction." },
+    ],
+    stack: [
+      { group: "Analysis", items: ["Python", "pandas", "NumPy", "Jupyter"] },
+      { group: "Modelling", items: ["scikit-learn", "statsmodels", "Linear regression", "StandardScaler"] },
+      { group: "Charts", items: ["Seaborn", "matplotlib"] },
+      { group: "Statistics", items: ["OLS", "VIF", "Residual analysis", "MAE, RMSE, R²"] },
+    ],
+  },
+  {
+    slug: "loantap",
+    number: 8,
+    caseName: "LoanTap business case",
+    titleLead: "LoanTap:",
+    titleAccent: "who should get a credit line?",
+    intro:
+      "Given a set of attributes for a person, should LoanTap extend them a credit line? A logistic regression on 396,030 loan records for the underwriting of personal loans.",
+    metaDescription:
+      "Logistic regression on 396,030 LoanTap loan records to assess creditworthiness for personal loans, including the precision and recall trade-off.",
+    reportFile: "/scaler/reports/loantap-report.pdf",
+    stats: [
+      { value: "396,030", label: "Loan records" },
+      { value: "19%", label: "Loans charged off" },
+      { value: "0.70", label: "ROC AUC on the test set" },
+      { value: "57", label: "Features after encoding" },
+    ],
+    brief: [
+      "LoanTap is an online platform offering customised loans to salaried professionals and businesses. Its data science team is building an underwriting layer to determine creditworthiness. This case focuses on the Personal Loan product.",
+      "The question is whether a credit line should be extended to a given person, and how to balance catching real defaulters against turning away good customers, since non-performing assets are a real problem in this industry.",
+    ],
+    findings: [
+      { value: "81 / 19", title: "An imbalanced target", desc: "81% of customers fully paid their loan and 19% were charged off, so accuracy alone can mislead." },
+      { value: "2.13", title: "Interest rate is the top risk signal", desc: "The interest rate has the largest positive coefficient, meaning higher rates go with more defaults." },
+      { value: "1.04", title: "Debt load raises risk", desc: "A higher debt-to-income ratio is the second-strongest sign of default." },
+      { value: "−1.14", title: "Income lowers risk", desc: "Annual income has the strongest negative coefficient, so higher earners default less." },
+      { value: "0.95", title: "Loan amount and instalment overlap", desc: "These two features are 95% correlated. Public records and bankruptcies are 70% correlated." },
+      { value: "7%", title: "Few defaulters are caught", desc: "At the default threshold the model catches 771 of 11,399 defaulters, despite 81% accuracy." },
+    ],
+    table: {
+      kicker: "Model results",
+      title: "Why accuracy isn't enough here",
+      intro: "Test results on 59,787 loans. The model handles fully paid loans well, but misses most defaulters. The area under the precision-recall curve is 0.35.",
+      headers: ["Class", "Precision", "Recall", "F1", "Loans"],
+      rows: [
+        ["Fully paid", "0.82", "0.98", "0.89", "48,388"],
+        ["Charged off", "0.51", "0.07", "0.12", "11,399"],
+        ["Overall accuracy", "", "", "0.81", "59,787"],
+      ],
+    },
+    charts: [
+      { src: "/scaler/loantap/feature-importance.png", alt: "Bar chart of logistic regression coefficients for each feature", width: 564, height: 564, caption: "Model coefficients: interest rate and debt-to-income push risk up, and income pushes it down.", narrow: true },
+      { src: "/scaler/loantap/roc.png", alt: "ROC curve with an area of 0.70", width: 395, height: 279, caption: "ROC curve, with an area of 0.70.", narrow: true },
+      { src: "/scaler/loantap/confusion.png", alt: "Confusion matrix of predictions on the test set", width: 329, height: 279, caption: "Confusion matrix on the test set.", narrow: true },
+      { src: "/scaler/loantap/correlation.png", alt: "Heatmap of correlations between numerical features", width: 659, height: 631, caption: "Correlation between the numerical features.", narrow: true },
+    ],
+    method: [
+      { title: "Exploration", desc: "Studied 27 columns with univariate and bivariate plots, and correlation checks against loan status." },
+      { title: "Outliers", desc: "Found outliers in all numerical features with the IQR method, and removed about 5% of the data as potential outliers." },
+      { title: "Feature engineering", desc: "Extracted the zip code from each address and dropped sub-grade, employment title and length, issue date, loan title, earliest credit line and address." },
+      { title: "Encoding", desc: "Mapped term, loan status and list status to numbers, and one-hot encoded categories like grade, home ownership, purpose and zip code." },
+      { title: "Modelling", desc: "An 80/20 split, MinMax scaling fitted on the training data, and a scikit-learn logistic regression." },
+      { title: "Evaluation", desc: "Accuracy, precision, recall, F1, a confusion matrix, ROC AUC and the precision-recall curve." },
+    ],
+    recommendationsTitle: "What this means for LoanTap",
+    recommendations: [
+      { title: "Don't disburse loans to everyone", desc: "About 1 in 5 borrowers in this data defaults, and those loans become non-performing assets." },
+      { title: "Verify every applicant", desc: "Many customers in the data are not verified. Each applicant should be checked internally or by a third party." },
+      { title: "Look closely at risky profiles", desc: "Take extra care with high interest rates and high debt-to-income ratios, and treat higher income as a positive sign." },
+      { title: "Improve defaulter detection before relying on the model", desc: "At 7% recall it isn't ready to be used alone. Tune it, or try a stronger model." },
+    ],
+    note: {
+      title: "An honest limitation",
+      desc: "The report creates SMOTE-balanced data, but these results come from a model trained on the original imbalanced data, which is a big reason recall is so low. The clear next step is to train on the balanced data and tune the decision threshold.",
+    },
+    stack: [
+      { group: "Analysis", items: ["Python", "pandas", "NumPy", "Jupyter"] },
+      { group: "Modelling", items: ["scikit-learn", "Logistic regression", "imbalanced-learn (SMOTE)", "MinMaxScaler", "One-hot encoding"] },
+      { group: "Charts", items: ["Seaborn", "matplotlib"] },
+      { group: "Evaluation", items: ["Precision and recall", "F1", "ROC AUC", "PR curve", "Confusion matrix"] },
     ],
   },
 ];

@@ -42,9 +42,7 @@ export default async function ScalerCaseStudy({ params }: Props) {
   const study = caseStudies.find((c) => c.slug === slug);
   if (!study) notFound();
 
-  const report = `${study.repo}/blob/main/${study.report}`;
-  const notebook = `${study.repo}/blob/main/${study.notebook}`;
-  const insights = `${study.repo}/blob/main/reports/insights_and_recommendations.md`;
+  const report = study.reportFile ?? `${study.repo}/blob/main/${study.report}`;
 
   return (
     <main className="min-h-screen bg-slate-950 text-white">
@@ -68,18 +66,29 @@ export default async function ScalerCaseStudy({ params }: Props) {
             </h1>
             <p className="mt-5 max-w-3xl text-xl leading-relaxed text-slate-300">{study.intro}</p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <a href={study.repo} target="_blank" rel="noreferrer" className={primaryBtn}>
-                View the code on GitHub →
-              </a>
-              <a href={report} target="_blank" rel="noreferrer" className={linkBtn}>
+              {study.repo && (
+                <a href={study.repo} target="_blank" rel="noreferrer" className={primaryBtn}>
+                  View the code on GitHub →
+                </a>
+              )}
+              <a href={report} target="_blank" rel="noreferrer" className={study.repo ? linkBtn : primaryBtn}>
                 Read the report (PDF) →
               </a>
-              <a href={notebook} target="_blank" rel="noreferrer" className={linkBtn}>
-                Open the notebook →
-              </a>
-              <a href={insights} target="_blank" rel="noreferrer" className={linkBtn}>
-                Insights summary →
-              </a>
+              {study.repo && (
+                <>
+                  <a href={`${study.repo}/blob/main/${study.notebook}`} target="_blank" rel="noreferrer" className={linkBtn}>
+                    Open the notebook →
+                  </a>
+                  <a
+                    href={`${study.repo}/blob/main/reports/insights_and_recommendations.md`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className={linkBtn}
+                  >
+                    Insights summary →
+                  </a>
+                </>
+              )}
             </div>
           </Reveal>
 
@@ -163,7 +172,7 @@ export default async function ScalerCaseStudy({ params }: Props) {
           <div className="mt-8 space-y-10">
             {study.charts.map((c) => (
               <Reveal key={c.src}>
-                <figure>
+                <figure className={c.narrow ? "mx-auto max-w-xl" : ""}>
                   <div className="overflow-hidden rounded-2xl border border-slate-800 bg-white shadow-2xl shadow-indigo-950/40">
                     <Image src={c.src} alt={c.alt} width={c.width} height={c.height} className="h-auto w-full" sizes="(min-width: 1024px) 960px, 100vw" />
                   </div>
@@ -176,7 +185,7 @@ export default async function ScalerCaseStudy({ params }: Props) {
 
         {/* Recommendations */}
         <section>
-          <SectionTitle kicker="Recommendations" title="What the business should do" />
+          <SectionTitle kicker="Recommendations" title={study.recommendationsTitle ?? "What the business should do"} />
           <div className="mt-8 space-y-4">
             {study.recommendations.map((r, i) => (
               <Reveal key={r.title} className="flex gap-5 rounded-2xl border border-slate-800 bg-slate-900/60 p-6">
@@ -234,13 +243,17 @@ export default async function ScalerCaseStudy({ params }: Props) {
         <Reveal className="rounded-3xl border border-slate-800 bg-gradient-to-br from-indigo-950/60 to-slate-900 p-10 text-center md:p-14">
           <h2 className="text-3xl font-bold md:text-4xl">See the full analysis</h2>
           <p className="mx-auto mt-4 max-w-xl text-slate-400">
-            The notebook, data, charts and full report are all on GitHub.
+            {study.repo
+              ? "The notebook, data, charts and full report are all on GitHub."
+              : "The code, outputs and charts are all in the full PDF report."}
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <a href={study.repo} target="_blank" rel="noreferrer" className={primaryBtn}>
-              View on GitHub →
-            </a>
-            <a href={report} target="_blank" rel="noreferrer" className={linkBtn}>
+            {study.repo && (
+              <a href={study.repo} target="_blank" rel="noreferrer" className={primaryBtn}>
+                View on GitHub →
+              </a>
+            )}
+            <a href={report} target="_blank" rel="noreferrer" className={study.repo ? linkBtn : primaryBtn}>
               Read the report →
             </a>
             <Link href="/scaler" className={linkBtn}>

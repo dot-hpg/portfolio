@@ -38,20 +38,23 @@ export default function ScalerProjects() {
           >
             <span className="w-fit rounded-full bg-pink-500/15 px-3 py-1 text-xs font-medium text-pink-300">
               Scaler project {i + 1}
+              {p.badge && ` · ${p.badge}`}
             </span>
             <h2 className="mt-4 text-2xl font-semibold md:text-3xl">{p.title}</h2>
             <p className="mt-3 max-w-3xl text-slate-400 md:text-lg">{p.desc}</p>
 
-            <div className="mt-6 grid gap-4 sm:grid-cols-3">
-              {p.highlights?.map((h) => (
-                <div key={h.label} className="rounded-xl border border-slate-800 bg-slate-950/50 p-4">
-                  <div className="bg-gradient-to-r from-indigo-400 to-pink-400 bg-clip-text text-3xl font-bold text-transparent">
-                    {h.value}
+            {p.highlights && (
+              <div className="mt-6 grid gap-4 sm:grid-cols-3">
+                {p.highlights.map((h) => (
+                  <div key={h.label} className="rounded-xl border border-slate-800 bg-slate-950/50 p-4">
+                    <div className="bg-gradient-to-r from-indigo-400 to-pink-400 bg-clip-text text-3xl font-bold text-transparent">
+                      {h.value}
+                    </div>
+                    <div className="mt-1 text-sm text-slate-400">{h.label}</div>
                   </div>
-                  <div className="mt-1 text-sm text-slate-400">{h.label}</div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
 
             <div className="mt-5 flex flex-wrap gap-2">
               {p.tags.map((t) => (
@@ -61,27 +64,29 @@ export default function ScalerProjects() {
               ))}
             </div>
 
-            <div className="mt-6 flex flex-wrap gap-3 pt-1">
-              {p.caseStudy && (
-                <Link
-                  href={p.caseStudy}
-                  className="rounded-lg bg-white px-4 py-2 text-sm font-medium text-slate-950 transition-colors hover:bg-slate-200"
-                >
-                  Read the full case study →
-                </Link>
-              )}
-              {p.links?.map((l) => (
-                <a
-                  key={l.href}
-                  href={l.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="rounded-lg border border-slate-700 px-4 py-2 text-sm text-slate-200 transition-colors hover:border-slate-500 hover:bg-slate-800 hover:text-white"
-                >
-                  {l.label} →
-                </a>
-              ))}
-            </div>
+            {(p.caseStudy || p.links) && (
+              <div className="mt-6 flex flex-wrap gap-3 pt-1">
+                {p.caseStudy && (
+                  <Link
+                    href={p.caseStudy}
+                    className="rounded-lg bg-white px-4 py-2 text-sm font-medium text-slate-950 transition-colors hover:bg-slate-200"
+                  >
+                    Read the full case study →
+                  </Link>
+                )}
+                {p.links?.map((l) => (
+                  <a
+                    key={l.href}
+                    href={l.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="rounded-lg border border-slate-700 px-4 py-2 text-sm text-slate-200 transition-colors hover:border-slate-500 hover:bg-slate-800 hover:text-white"
+                  >
+                    {l.label} →
+                  </a>
+                ))}
+              </div>
+            )}
           </Reveal>
         ))}
       </section>
