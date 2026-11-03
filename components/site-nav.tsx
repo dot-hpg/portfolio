@@ -3,7 +3,7 @@ import { navLinks, site } from "@/lib/site";
 
 export function SiteNav() {
   return (
-    <nav className="relative z-10 mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-5">
+    <nav className="relative z-10 mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-4 gap-y-2 px-6 py-5">
       <Link href="/" className="shrink-0 text-lg font-bold tracking-tight">
         {site.shortName}
         <span className="text-indigo-400">.</span>

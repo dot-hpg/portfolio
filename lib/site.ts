@@ -129,6 +129,27 @@ export const site = {
       tags: ["Next.js", "Tailwind"],
     },
   ] as Project[],
+  // Business cases from the Scaler program, shown on the /scaler page in this order.
+  scalerProjects: [
+    {
+      title: "Target Brazil — E-commerce Operations SQL Case Study",
+      desc: "An end-to-end SQL analysis of 99,441 orders placed with Target in Brazil between September 2016 and October 2018, built for the Scaler Target SQL business case. 30 BigQuery queries answer every question in the brief, then go further with six deep-dives into lateness and reviews, local vs cross-state fulfilment, seller coverage, categories, retention and peak-season delays. The work ends with eight ranked, evidence-backed recommendations, and one script rebuilds every result from the raw data.",
+      tags: ["SQL", "BigQuery", "DuckDB", "Python", "pandas", "matplotlib", "Business analytics"],
+      caseStudy: "/scaler/target-brazil",
+      highlights: [
+        { value: "+137%", label: "Order value, Jan-Aug 2018 vs 2017" },
+        { value: "4.32 → 1.70", label: "Review score, very early vs very late orders" },
+        { value: "2x faster", label: "Same-state delivery, with 43% lower freight" },
+      ],
+      links: [
+        { label: "View on GitHub", href: "https://github.com/dot-hpg/target-brazil-sql-case-study" },
+        {
+          label: "Read the report (PDF)",
+          href: "https://github.com/dot-hpg/target-brazil-sql-case-study/blob/main/report/Target_SQL_Case_Study_Guntuku_Hariprasad.pdf",
+        },
+      ],
+    },
+  ] as Project[],
   // Replace with the email address you want visitors to use.
   email: "your.email@example.com",
   socials: [
@@ -142,5 +163,6 @@ export const navLinks = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Projects", href: "/#projects" },
+  { label: "Scaler", href: "/scaler" },
   { label: "Contact", href: "/#contact" },
 ];
