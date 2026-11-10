@@ -26,16 +26,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 function SectionTitle({ kicker, title }: { kicker: string; title: string }) {
   return (
     <Reveal>
-      <p className="font-mono text-xs font-semibold tracking-[0.18em] text-pink-400 uppercase">{kicker}</p>
+      <p className="font-mono text-xs font-semibold tracking-[0.18em] text-accent uppercase">{kicker}</p>
       <h2 className="mt-3 text-3xl font-bold tracking-tight md:text-4xl">{title}</h2>
     </Reveal>
   );
 }
 
 const linkBtn =
-  "rounded-lg border border-slate-700 px-5 py-3 text-sm font-medium text-slate-200 transition-colors hover:border-slate-500 hover:bg-slate-800 hover:text-white";
+  "rounded-full border border-white/15 px-5 py-3 text-sm font-medium text-slate-200 transition-colors hover:border-white/40 hover:text-white";
 const primaryBtn =
-  "rounded-lg bg-white px-5 py-3 text-sm font-semibold text-slate-950 transition-colors hover:bg-slate-200";
+  "rounded-full bg-white px-5 py-3 text-sm font-semibold text-ink transition-colors hover:bg-accent";
 
 export default async function ScalerCaseStudy({ params }: Props) {
   const { slug } = await params;
@@ -45,22 +45,22 @@ export default async function ScalerCaseStudy({ params }: Props) {
   const report = study.reportFile ?? `${study.repo}/blob/main/${study.report}`;
 
   return (
-    <main className="min-h-screen bg-slate-950 text-white">
+    <main className="flex min-h-screen flex-col overflow-x-clip text-white">
       {/* Hero */}
-      <div className="relative">
+      <SiteNav />
+      <div className="relative -mt-16 pt-16">
         <AnimatedBackground />
-        <SiteNav />
         <section className="relative z-10 mx-auto max-w-5xl px-6 pt-16 pb-20">
-          <Link href="/scaler" className="text-sm text-slate-400 hover:text-white">
-            ← All Scaler projects
+          <Link href="/work" className="text-sm text-slate-400 hover:text-white">
+            ← All work
           </Link>
           <Reveal>
-            <span className="mt-8 inline-block rounded-full border border-pink-500/40 bg-pink-500/10 px-4 py-1.5 text-sm font-medium text-pink-300">
+            <span className="mt-8 inline-block rounded-full border border-accent/30 bg-accent/10 px-4 py-1.5 text-sm font-medium text-accent">
               Scaler project {study.number} · {study.caseName}
             </span>
             <h1 className="mt-6 text-4xl font-extrabold tracking-tight md:text-6xl">
               {study.titleLead}{" "}
-              <span className="bg-gradient-to-r from-indigo-400 to-pink-400 bg-clip-text text-transparent">
+              <span className="text-accent-gradient">
                 {study.titleAccent}
               </span>
             </h1>
@@ -94,8 +94,8 @@ export default async function ScalerCaseStudy({ params }: Props) {
 
           <Reveal delay={0.15} className="mt-12 grid grid-cols-2 gap-4 md:grid-cols-4">
             {study.stats.map((s) => (
-              <div key={s.label} className="rounded-xl border border-slate-800 bg-slate-900/70 p-5">
-                <div className="bg-gradient-to-r from-indigo-400 to-pink-400 bg-clip-text text-2xl font-bold text-transparent md:text-3xl">
+              <div key={s.label} className="card rounded-xl p-5">
+                <div className="text-accent-gradient text-2xl font-bold  md:text-3xl">
                   {s.value}
                 </div>
                 <div className="mt-1 text-sm text-slate-400">{s.label}</div>
@@ -123,8 +123,8 @@ export default async function ScalerCaseStudy({ params }: Props) {
           <SectionTitle kicker="Key findings" title="What the data showed" />
           <div className="mt-8 grid gap-5 md:grid-cols-2">
             {study.findings.map((f, i) => (
-              <Reveal key={f.title} delay={i * 0.04} className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6">
-                <div className="bg-gradient-to-r from-indigo-400 to-pink-400 bg-clip-text text-3xl font-bold text-transparent">
+              <Reveal key={f.title} delay={i * 0.04} className="card rounded-2xl p-6">
+                <div className="text-accent-gradient text-3xl font-bold">
                   {f.value}
                 </div>
                 <h3 className="mt-2 text-lg font-semibold">{f.title}</h3>
@@ -139,9 +139,9 @@ export default async function ScalerCaseStudy({ params }: Props) {
           <SectionTitle kicker={study.table.kicker} title={study.table.title} />
           <Reveal>
             <p className="mt-6 max-w-3xl text-lg leading-relaxed text-slate-300">{study.table.intro}</p>
-            <div className="mt-8 overflow-x-auto rounded-2xl border border-slate-800">
+            <div className="mt-8 overflow-x-auto rounded-2xl border border-line">
               <table className="w-full min-w-[560px] text-left text-sm">
-                <thead className="bg-slate-900 text-slate-300">
+                <thead className="bg-panel-2 text-slate-300">
                   <tr>
                     {study.table.headers.map((h) => (
                       <th key={h} className="px-5 py-3 font-semibold">
@@ -150,7 +150,7 @@ export default async function ScalerCaseStudy({ params }: Props) {
                     ))}
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-800 text-slate-400">
+                <tbody className="divide-y divide-white/5 text-slate-400">
                   {study.table.rows.map((row) => (
                     <tr key={row[0]}>
                       {row.map((cell, i) => (
@@ -173,7 +173,7 @@ export default async function ScalerCaseStudy({ params }: Props) {
             {study.charts.map((c) => (
               <Reveal key={c.src}>
                 <figure className={c.narrow ? "mx-auto max-w-xl" : ""}>
-                  <div className="overflow-hidden rounded-2xl border border-slate-800 bg-white shadow-2xl shadow-indigo-950/40">
+                  <div className="overflow-hidden rounded-2xl border border-line bg-white shadow-2xl shadow-black/40">
                     <Image src={c.src} alt={c.alt} width={c.width} height={c.height} className="h-auto w-full" sizes="(min-width: 1024px) 960px, 100vw" />
                   </div>
                   <figcaption className="mt-3 text-center text-sm text-slate-500">{c.caption}</figcaption>
@@ -188,8 +188,8 @@ export default async function ScalerCaseStudy({ params }: Props) {
           <SectionTitle kicker="Recommendations" title={study.recommendationsTitle ?? "What the business should do"} />
           <div className="mt-8 space-y-4">
             {study.recommendations.map((r, i) => (
-              <Reveal key={r.title} className="flex gap-5 rounded-2xl border border-slate-800 bg-slate-900/60 p-6">
-                <span className="bg-gradient-to-r from-indigo-400 to-pink-400 bg-clip-text font-mono text-2xl font-bold text-transparent">
+              <Reveal key={r.title} className="flex gap-5 card rounded-2xl p-6">
+                <span className="text-accent-gradient font-mono text-2xl font-bold">
                   {i + 1}
                 </span>
                 <div>
@@ -206,14 +206,14 @@ export default async function ScalerCaseStudy({ params }: Props) {
           <SectionTitle kicker="Method" title="How I did the analysis" />
           <div className="mt-8 grid gap-5 md:grid-cols-2">
             {study.method.map((m, i) => (
-              <Reveal key={m.title} delay={i * 0.04} className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6">
+              <Reveal key={m.title} delay={i * 0.04} className="card rounded-2xl p-6">
                 <h3 className="font-semibold">{m.title}</h3>
                 <p className="mt-2 text-slate-400">{m.desc}</p>
               </Reveal>
             ))}
           </div>
           {study.note && (
-            <Reveal className="mt-5 rounded-2xl border border-pink-500/30 bg-pink-500/5 p-6">
+            <Reveal className="mt-5 rounded-2xl border border-accent/30 bg-accent/5 p-6">
               <h3 className="font-semibold">{study.note.title}</h3>
               <p className="mt-2 text-slate-400">{study.note.desc}</p>
             </Reveal>
@@ -225,11 +225,11 @@ export default async function ScalerCaseStudy({ params }: Props) {
           <SectionTitle kicker="Tools" title="Tools I used" />
           <div className="mt-8 grid gap-5 sm:grid-cols-2">
             {study.stack.map((s) => (
-              <Reveal key={s.group} className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6">
+              <Reveal key={s.group} className="card rounded-2xl p-6">
                 <h3 className="font-semibold">{s.group}</h3>
                 <div className="mt-3 flex flex-wrap gap-2">
                   {s.items.map((item) => (
-                    <span key={item} className="rounded-full bg-slate-800 px-3 py-1 text-xs text-slate-300">
+                    <span key={item} className="rounded-md border border-line bg-white/[0.02] px-2.5 py-1 text-xs text-slate-300">
                       {item}
                     </span>
                   ))}
@@ -240,7 +240,7 @@ export default async function ScalerCaseStudy({ params }: Props) {
         </section>
 
         {/* CTA */}
-        <Reveal className="rounded-3xl border border-slate-800 bg-gradient-to-br from-indigo-950/60 to-slate-900 p-10 text-center md:p-14">
+        <Reveal className="rounded-3xl border border-line bg-gradient-to-br from-teal-950/40 to-panel p-10 text-center md:p-14">
           <h2 className="text-3xl font-bold md:text-4xl">See the full analysis</h2>
           <p className="mx-auto mt-4 max-w-xl text-slate-400">
             {study.repo
@@ -256,8 +256,8 @@ export default async function ScalerCaseStudy({ params }: Props) {
             <a href={report} target="_blank" rel="noreferrer" className={study.repo ? linkBtn : primaryBtn}>
               Read the report →
             </a>
-            <Link href="/scaler" className={linkBtn}>
-              All Scaler projects →
+            <Link href="/work" className={linkBtn}>
+              All work →
             </Link>
           </div>
         </Reveal>
