@@ -113,7 +113,7 @@ ORDER BY items DESC;`;
 function SectionTitle({ kicker, title }: { kicker: string; title: string }) {
   return (
     <Reveal>
-      <p className="font-mono text-xs font-semibold tracking-[0.18em] text-pink-400 uppercase">{kicker}</p>
+      <p className="font-mono text-xs font-semibold tracking-[0.18em] text-accent uppercase">{kicker}</p>
       <h2 className="mt-3 text-3xl font-bold tracking-tight md:text-4xl">{title}</h2>
     </Reveal>
   );
@@ -123,7 +123,7 @@ function Chart({ src, alt, width, height, caption }: { src: string; alt: string;
   return (
     <Reveal>
       <figure>
-        <div className="overflow-hidden rounded-2xl border border-slate-800 bg-white shadow-2xl shadow-indigo-950/40">
+        <div className="overflow-hidden rounded-2xl border border-line bg-white shadow-2xl shadow-black/40">
           <Image src={src} alt={alt} width={width} height={height} className="h-auto w-full" sizes="(min-width: 1024px) 960px, 100vw" />
         </div>
         <figcaption className="mt-3 text-center text-sm text-slate-500">{caption}</figcaption>
@@ -133,28 +133,28 @@ function Chart({ src, alt, width, height, caption }: { src: string; alt: string;
 }
 
 const linkBtn =
-  "rounded-lg border border-slate-700 px-5 py-3 text-sm font-medium text-slate-200 transition-colors hover:border-slate-500 hover:bg-slate-800 hover:text-white";
+  "rounded-full border border-white/15 px-5 py-3 text-sm font-medium text-slate-200 transition-colors hover:border-white/40 hover:text-white";
 const primaryBtn =
-  "rounded-lg bg-white px-5 py-3 text-sm font-semibold text-slate-950 transition-colors hover:bg-slate-200";
+  "rounded-full bg-white px-5 py-3 text-sm font-semibold text-ink transition-colors hover:bg-accent";
 
 export default function TargetBrazilCaseStudy() {
   return (
-    <main className="min-h-screen bg-slate-950 text-white">
+    <main className="flex min-h-screen flex-col overflow-x-clip text-white">
       {/* Hero */}
-      <div className="relative">
+      <SiteNav />
+      <div className="relative -mt-16 pt-16">
         <AnimatedBackground />
-        <SiteNav />
         <section className="relative z-10 mx-auto max-w-5xl px-6 pt-16 pb-20">
-          <Link href="/scaler" className="text-sm text-slate-400 hover:text-white">
-            ← All Scaler projects
+          <Link href="/work" className="text-sm text-slate-400 hover:text-white">
+            ← All work
           </Link>
           <Reveal>
-            <span className="mt-8 inline-block rounded-full border border-pink-500/40 bg-pink-500/10 px-4 py-1.5 text-sm font-medium text-pink-300">
+            <span className="mt-8 inline-block rounded-full border border-accent/30 bg-accent/10 px-4 py-1.5 text-sm font-medium text-accent">
               Scaler project 1 · Target SQL business case
             </span>
             <h1 className="mt-6 text-4xl font-extrabold tracking-tight md:text-6xl">
               Target Brazil:{" "}
-              <span className="bg-gradient-to-r from-indigo-400 to-pink-400 bg-clip-text text-transparent">
+              <span className="text-accent-gradient">
                 e-commerce operations in SQL
               </span>
             </h1>
@@ -180,8 +180,8 @@ export default function TargetBrazilCaseStudy() {
 
           <Reveal delay={0.15} className="mt-12 grid grid-cols-2 gap-4 md:grid-cols-4">
             {stats.map((s) => (
-              <div key={s.label} className="rounded-xl border border-slate-800 bg-slate-900/70 p-5">
-                <div className="bg-gradient-to-r from-indigo-400 to-pink-400 bg-clip-text text-3xl font-bold text-transparent">
+              <div key={s.label} className="card rounded-xl p-5">
+                <div className="text-accent-gradient text-3xl font-bold">
                   {s.value}
                 </div>
                 <div className="mt-1 text-sm text-slate-400">{s.label}</div>
@@ -203,7 +203,7 @@ export default function TargetBrazilCaseStudy() {
             </p>
             <p className="text-lg leading-relaxed text-slate-300">
               I answered{" "}
-              <a href={BRIEF} target="_blank" rel="noreferrer" className="text-indigo-300 underline underline-offset-4 hover:text-white">
+              <a href={BRIEF} target="_blank" rel="noreferrer" className="text-accent underline underline-offset-4 hover:text-white">
                 every question in the brief
               </a>{" "}
               with a query, then added six deep-dives of my own to explain <b className="text-white">why</b> the
@@ -217,8 +217,8 @@ export default function TargetBrazilCaseStudy() {
           <SectionTitle kicker="Key findings" title="What the data showed" />
           <div className="mt-8 grid gap-5 md:grid-cols-2">
             {findings.map((f, i) => (
-              <Reveal key={f.title} delay={i * 0.04} className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6">
-                <div className="bg-gradient-to-r from-indigo-400 to-pink-400 bg-clip-text text-3xl font-bold text-transparent">
+              <Reveal key={f.title} delay={i * 0.04} className="card rounded-2xl p-6">
+                <div className="text-accent-gradient text-3xl font-bold">
                   {f.value}
                 </div>
                 <h3 className="mt-2 text-lg font-semibold">{f.title}</h3>
@@ -245,9 +245,9 @@ export default function TargetBrazilCaseStudy() {
               Arriving early barely raises review scores, but arriving late drags them down fast. That is why the first
               recommendation is to fix reliability before chasing speed.
             </p>
-            <div className="mt-8 overflow-x-auto rounded-2xl border border-slate-800">
+            <div className="mt-8 overflow-x-auto rounded-2xl border border-line">
               <table className="w-full min-w-[480px] text-left text-sm">
-                <thead className="bg-slate-900 text-slate-300">
+                <thead className="bg-panel-2 text-slate-300">
                   <tr>
                     <th className="px-5 py-3 font-semibold">Delivered</th>
                     <th className="px-5 py-3 font-semibold">Orders</th>
@@ -255,7 +255,7 @@ export default function TargetBrazilCaseStudy() {
                     <th className="px-5 py-3 font-semibold">1-star share</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-800 text-slate-400">
+                <tbody className="divide-y divide-white/5 text-slate-400">
                   {reviewRows.map((r) => (
                     <tr key={r.bucket}>
                       <td className="px-5 py-3 text-slate-200">{r.bucket}</td>
@@ -287,15 +287,15 @@ export default function TargetBrazilCaseStudy() {
               One of the deep-dives beyond the brief. It joins four tables to compare orders where the seller is in the
               customer&apos;s state with those shipped from elsewhere.
             </p>
-            <pre className="mt-6 overflow-x-auto rounded-2xl border border-slate-800 bg-slate-900/80 p-5 font-mono text-xs leading-relaxed text-slate-300 md:text-sm">
+            <pre className="mt-6 overflow-x-auto rounded-2xl border border-line bg-panel p-5 font-mono text-xs leading-relaxed text-slate-300 md:text-sm">
               <code>{SQL}</code>
             </pre>
             <div className="mt-6 grid gap-4 sm:grid-cols-2">
-              <div className="rounded-xl border border-slate-800 bg-slate-900/60 p-5">
+              <div className="rounded-xl border border-line bg-panel p-5">
                 <div className="font-semibold">Same state</div>
                 <p className="mt-2 text-sm text-slate-400">7.46 days · R$13.45 average freight · 4.45% late</p>
               </div>
-              <div className="rounded-xl border border-slate-800 bg-slate-900/60 p-5">
+              <div className="rounded-xl border border-line bg-panel p-5">
                 <div className="font-semibold">Cross state</div>
                 <p className="mt-2 text-sm text-slate-400">14.58 days · R$23.63 average freight · 7.81% late</p>
               </div>
@@ -317,10 +317,10 @@ export default function TargetBrazilCaseStudy() {
           <SectionTitle kicker="Coverage" title="All 30 queries" />
           <div className="mt-8 grid gap-4 md:grid-cols-2">
             {questions.map((q, i) => (
-              <Reveal key={q.group} delay={i * 0.03} className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6">
+              <Reveal key={q.group} delay={i * 0.03} className="card rounded-2xl p-6">
                 <div className="flex items-baseline justify-between gap-4">
                   <h3 className="font-semibold">{q.group}</h3>
-                  <span className="shrink-0 text-sm text-pink-300">{q.count} queries</span>
+                  <span className="shrink-0 text-sm text-accent">{q.count} queries</span>
                 </div>
                 <p className="mt-2 text-sm text-slate-400">{q.desc}</p>
               </Reveal>
@@ -361,8 +361,8 @@ export default function TargetBrazilCaseStudy() {
           <SectionTitle kicker="Recommendations" title="Eight actions, ranked" />
           <div className="mt-8 space-y-4">
             {recommendations.map((r, i) => (
-              <Reveal key={r.title} className="flex gap-5 rounded-2xl border border-slate-800 bg-slate-900/60 p-6">
-                <span className="bg-gradient-to-r from-indigo-400 to-pink-400 bg-clip-text font-mono text-2xl font-bold text-transparent">
+              <Reveal key={r.title} className="flex gap-5 card rounded-2xl p-6">
+                <span className="text-accent-gradient font-mono text-2xl font-bold">
                   {i + 1}
                 </span>
                 <div>
@@ -379,7 +379,7 @@ export default function TargetBrazilCaseStudy() {
           <SectionTitle kicker="Method" title="How I kept the work trustworthy" />
           <div className="mt-8 grid gap-5 md:grid-cols-2">
             {methods.map((m, i) => (
-              <Reveal key={m.title} delay={i * 0.04} className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6">
+              <Reveal key={m.title} delay={i * 0.04} className="card rounded-2xl p-6">
                 <h3 className="font-semibold">{m.title}</h3>
                 <p className="mt-2 text-slate-400">{m.desc}</p>
               </Reveal>
@@ -401,11 +401,11 @@ export default function TargetBrazilCaseStudy() {
           <SectionTitle kicker="Tools" title="Tools I used" />
           <div className="mt-8 grid gap-5 sm:grid-cols-2">
             {stack.map((s) => (
-              <Reveal key={s.group} className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6">
+              <Reveal key={s.group} className="card rounded-2xl p-6">
                 <h3 className="font-semibold">{s.group}</h3>
                 <div className="mt-3 flex flex-wrap gap-2">
                   {s.items.map((item) => (
-                    <span key={item} className="rounded-full bg-slate-800 px-3 py-1 text-xs text-slate-300">
+                    <span key={item} className="rounded-md border border-line bg-white/[0.02] px-2.5 py-1 text-xs text-slate-300">
                       {item}
                     </span>
                   ))}
@@ -416,7 +416,7 @@ export default function TargetBrazilCaseStudy() {
         </section>
 
         {/* CTA */}
-        <Reveal className="rounded-3xl border border-slate-800 bg-gradient-to-br from-indigo-950/60 to-slate-900 p-10 text-center md:p-14">
+        <Reveal className="rounded-3xl border border-line bg-gradient-to-br from-teal-950/40 to-panel p-10 text-center md:p-14">
           <h2 className="text-3xl font-bold md:text-4xl">See the full analysis</h2>
           <p className="mx-auto mt-4 max-w-xl text-slate-400">
             Every query, result, chart and the full report are on GitHub, ready to rerun.
@@ -428,8 +428,8 @@ export default function TargetBrazilCaseStudy() {
             <a href={REPORT} target="_blank" rel="noreferrer" className={linkBtn}>
               Read the report →
             </a>
-            <Link href="/scaler" className={linkBtn}>
-              All Scaler projects →
+            <Link href="/work" className={linkBtn}>
+              All work →
             </Link>
           </div>
         </Reveal>

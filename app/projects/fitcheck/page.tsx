@@ -112,7 +112,7 @@ const stack = [
 function SectionTitle({ kicker, title }: { kicker: string; title: string }) {
   return (
     <Reveal>
-      <p className="font-mono text-xs font-semibold tracking-[0.18em] text-pink-400 uppercase">{kicker}</p>
+      <p className="font-mono text-xs font-semibold tracking-[0.18em] text-accent uppercase">{kicker}</p>
       <h2 className="mt-3 text-3xl font-bold tracking-tight md:text-4xl">{title}</h2>
     </Reveal>
   );
@@ -122,7 +122,7 @@ function Shot({ src, alt, width, height, caption }: { src: string; alt: string; 
   return (
     <Reveal>
       <figure>
-        <div className="overflow-hidden rounded-2xl border border-slate-800 bg-white shadow-2xl shadow-indigo-950/40">
+        <div className="overflow-hidden rounded-2xl border border-line bg-white shadow-2xl shadow-black/40">
           <Image src={src} alt={alt} width={width} height={height} className="h-auto w-full" sizes="(min-width: 1024px) 960px, 100vw" />
         </div>
         <figcaption className="mt-3 text-center text-sm text-slate-500">{caption}</figcaption>
@@ -132,27 +132,27 @@ function Shot({ src, alt, width, height, caption }: { src: string; alt: string; 
 }
 
 const linkBtn =
-  "rounded-lg border border-slate-700 px-5 py-3 text-sm font-medium text-slate-200 transition-colors hover:border-slate-500 hover:bg-slate-800 hover:text-white";
+  "rounded-full border border-white/15 px-5 py-3 text-sm font-medium text-slate-200 transition-colors hover:border-white/40 hover:text-white";
 const primaryBtn =
-  "rounded-lg bg-white px-5 py-3 text-sm font-semibold text-slate-950 transition-colors hover:bg-slate-200";
+  "rounded-full bg-white px-5 py-3 text-sm font-semibold text-ink transition-colors hover:bg-accent";
 
 export default function FitCheckCaseStudy() {
   return (
-    <main className="min-h-screen bg-slate-950 text-white">
+    <main className="flex min-h-screen flex-col overflow-x-clip text-white">
       {/* Hero */}
-      <div className="relative">
+      <SiteNav />
+      <div className="relative -mt-16 pt-16">
         <AnimatedBackground />
-        <SiteNav />
         <section className="relative z-10 mx-auto max-w-5xl px-6 pt-16 pb-20">
           <Link href="/#projects" className="text-sm text-slate-400 hover:text-white">
             ← All projects
           </Link>
           <Reveal>
-            <span className="mt-8 inline-block rounded-full border border-pink-500/40 bg-pink-500/10 px-4 py-1.5 text-sm font-medium text-pink-300">
+            <span className="mt-8 inline-block rounded-full border border-accent/30 bg-accent/10 px-4 py-1.5 text-sm font-medium text-accent">
               Built for my AI Engineer applications
             </span>
             <h1 className="mt-6 text-5xl font-extrabold tracking-tight md:text-7xl">
-              Fit<span className="bg-gradient-to-r from-indigo-400 to-pink-400 bg-clip-text text-transparent">Check</span>
+              Fit<span className="text-accent-gradient">Check</span>
             </h1>
             <p className="mt-5 max-w-3xl text-xl leading-relaxed text-slate-300 md:text-2xl">
               Will your resume pass for this job? An explainable match score, a skill-gap report and bullet rewrites,
@@ -170,8 +170,8 @@ export default function FitCheckCaseStudy() {
 
           <Reveal delay={0.15} className="mt-12 grid grid-cols-2 gap-4 md:grid-cols-4">
             {stats.map((s) => (
-              <div key={s.label} className="rounded-xl border border-slate-800 bg-slate-900/70 p-5">
-                <div className="bg-gradient-to-r from-indigo-400 to-pink-400 bg-clip-text text-3xl font-bold text-transparent">
+              <div key={s.label} className="card rounded-xl p-5">
+                <div className="text-accent-gradient text-3xl font-bold">
                   {s.value}
                 </div>
                 <div className="mt-1 text-sm text-slate-400">{s.label}</div>
@@ -219,7 +219,7 @@ export default function FitCheckCaseStudy() {
           <div className="mt-8 grid gap-4 md:grid-cols-2">
             {requirements.map((r, i) => (
               <Reveal key={r.need} delay={(i % 2) * 0.08}>
-                <div className="h-full rounded-2xl border border-slate-800 bg-slate-900/60 p-6">
+                <div className="h-full card rounded-2xl p-6">
                   <div className="flex items-start gap-3">
                     <span className="mt-0.5 grid size-6 shrink-0 place-items-center rounded-full bg-emerald-500/15 text-sm text-emerald-400">
                       ✓
@@ -241,7 +241,7 @@ export default function FitCheckCaseStudy() {
           <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {features.map((f, i) => (
               <Reveal key={f.title} delay={(i % 4) * 0.06}>
-                <div className="h-full rounded-2xl border border-slate-800 bg-slate-900/60 p-5">
+                <div className="h-full card rounded-2xl p-5">
                   <h3 className="font-semibold">{f.title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-slate-400">{f.desc}</p>
                 </div>
@@ -287,8 +287,8 @@ export default function FitCheckCaseStudy() {
           <ol className="mt-8 space-y-4">
             {pipeline.map((p, i) => (
               <Reveal key={p.step} delay={i * 0.05}>
-                <li className="flex gap-5 rounded-2xl border border-slate-800 bg-slate-900/60 p-6">
-                  <span className="bg-gradient-to-r from-indigo-400 to-pink-400 bg-clip-text font-mono text-2xl font-bold text-transparent">
+                <li className="flex gap-5 card rounded-2xl p-6">
+                  <span className="text-accent-gradient font-mono text-2xl font-bold">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <div>
@@ -305,7 +305,7 @@ export default function FitCheckCaseStudy() {
         <section>
           <SectionTitle kicker="Scoring" title="Every point has a reason" />
           <div className="mt-8 grid items-start gap-8 lg:grid-cols-[1fr_1.4fr]">
-            <Reveal className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6">
+            <Reveal className="card rounded-2xl p-6">
               <h3 className="font-semibold">Component weights</h3>
               <div className="mt-5 space-y-4">
                 {weights.map((w) => (
@@ -314,9 +314,9 @@ export default function FitCheckCaseStudy() {
                       <span className="text-slate-300">{w.name}</span>
                       <span className="font-mono text-slate-400">{w.weight}</span>
                     </div>
-                    <div className="mt-1.5 h-2 rounded-full bg-slate-800">
+                    <div className="mt-1.5 h-2 rounded-full bg-white/10">
                       <div
-                        className="h-2 rounded-full bg-gradient-to-r from-indigo-400 to-pink-400"
+                        className="h-2 rounded-full bg-gradient-to-r from-teal-500 to-emerald-300"
                         style={{ width: `${(w.weight / 35) * 100}%` }}
                       />
                     </div>
@@ -364,14 +364,14 @@ export default function FitCheckCaseStudy() {
           <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {engineering.map((e, i) => (
               <Reveal key={e.title} delay={(i % 3) * 0.06}>
-                <div className="h-full rounded-2xl border border-slate-800 bg-slate-900/60 p-5">
+                <div className="h-full card rounded-2xl p-5">
                   <h3 className="font-semibold">{e.title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-slate-400">{e.desc}</p>
                 </div>
               </Reveal>
             ))}
           </div>
-          <Reveal className="mt-6 rounded-2xl border border-slate-800 bg-slate-900/60 p-6 text-slate-300">
+          <Reveal className="mt-6 card rounded-2xl p-6 text-slate-300">
             <b className="text-white">Testing:</b> the matching engine is plain TypeScript with no UI or browser
             dependencies, so it is fully unit tested (~97% coverage with Vitest). Playwright covers the app end to end,
             including a real-model test that serves the model from disk and runs it through the worker, ONNX Runtime and
@@ -384,11 +384,11 @@ export default function FitCheckCaseStudy() {
           <SectionTitle kicker="Tech stack" title="Tools I used" />
           <div className="mt-8 grid gap-4 md:grid-cols-2">
             {stack.map((s) => (
-              <Reveal key={s.group} className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6">
+              <Reveal key={s.group} className="card rounded-2xl p-6">
                 <h3 className="font-mono text-xs font-semibold tracking-[0.16em] text-slate-400 uppercase">{s.group}</h3>
                 <div className="mt-4 flex flex-wrap gap-2">
                   {s.items.map((t) => (
-                    <span key={t} className="rounded-full bg-slate-800 px-3 py-1.5 text-sm text-slate-200">
+                    <span key={t} className="rounded-md border border-line px-3 py-1.5 text-sm text-slate-200">
                       {t}
                     </span>
                   ))}
@@ -400,7 +400,7 @@ export default function FitCheckCaseStudy() {
 
         {/* Limits + roadmap */}
         <section className="grid gap-6 md:grid-cols-2">
-          <Reveal className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6">
+          <Reveal className="card rounded-2xl p-6">
             <h3 className="text-xl font-semibold">Honest limitations</h3>
             <ul className="mt-4 list-disc space-y-2 pl-5 text-slate-400">
               <li>The skill list targets software, data and DevOps roles; other fields get fewer skill matches.</li>
@@ -408,7 +408,7 @@ export default function FitCheckCaseStudy() {
               <li>The score estimates fit with the post; it does not copy any specific company&apos;s ATS.</li>
             </ul>
           </Reveal>
-          <Reveal delay={0.08} className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6">
+          <Reveal delay={0.08} className="card rounded-2xl p-6">
             <h3 className="text-xl font-semibold">What&apos;s next</h3>
             <ul className="mt-4 list-disc space-y-2 pl-5 text-slate-400">
               <li>Shareable result links, still with no server</li>
@@ -420,7 +420,7 @@ export default function FitCheckCaseStudy() {
         </section>
 
         {/* CTA */}
-        <Reveal className="rounded-3xl border border-slate-800 bg-gradient-to-br from-indigo-950/60 to-slate-900 p-10 text-center md:p-14">
+        <Reveal className="rounded-3xl border border-line bg-gradient-to-br from-teal-950/40 to-panel p-10 text-center md:p-14">
           <h2 className="text-3xl font-bold md:text-4xl">Try it with your own resume</h2>
           <p className="mx-auto mt-4 max-w-xl text-slate-400">
             Free, no sign-up, and nothing leaves your browser. Hiring for an AI Engineer? I&apos;d love to talk.

@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -12,19 +12,36 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-instrument-serif",
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+});
+
 export const metadata: Metadata = {
-  title: "Guntuku Hariprasad | AI Engineer",
+  title: "Guntuku Hariprasad | Data Analyst",
   description:
-    "Portfolio of Guntuku Hariprasad, an AI Engineer building NLP, embedding and forecasting systems that ship to production.",
+    "Data analyst portfolio of Guntuku Hariprasad: SQL, Python, statistics and dashboards applied to real business cases, from 99,441 Target orders to 550,068 Walmart transactions, each ending in recommendations.",
+  openGraph: {
+    title: "Guntuku Hariprasad | Data Analyst",
+    description:
+      "SQL, Python, statistics and dashboards applied to real business cases, each ending in recommendations a business can act on.",
+    type: "website",
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#070a10",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="flex min-h-full flex-col bg-ink">{children}</body>
     </html>
   );
 }
