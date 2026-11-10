@@ -378,12 +378,6 @@ export const skillFilters: Skill[] = ["SQL", "Python & EDA", "Statistics", "Dash
 // Machine learning and AI work, shown in a smaller section below the analytics projects.
 export const beyond = [
   {
-    title: "FitCheck: resume and job match",
-    desc: "A private resume checker that runs a sentence-embedding model in the browser to match each job requirement with the resume line that means the same thing.",
-    tags: ["Embeddings", "Transformers.js", "TypeScript"],
-    href: "/projects/fitcheck",
-  },
-  {
     title: "Twitter named entity recognition",
     desc: "A fine-tuned BERT model compared with a BiLSTM-CRF across 17 controlled experiments, served through a FastAPI service.",
     tags: ["NLP", "BERT", "TensorFlow"],

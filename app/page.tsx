@@ -247,7 +247,7 @@ export default function Home() {
             }
             intro="When a question needs a model rather than a chart, I can take it from notebook to a working app."
           />
-          <div className="grid gap-4 sm:grid-cols-3">
+          <div className="grid gap-4 sm:grid-cols-2">
             {beyond.map((b, i) => {
               const ext = b.href.startsWith("http");
               const Comp = ext ? "a" : Link;
